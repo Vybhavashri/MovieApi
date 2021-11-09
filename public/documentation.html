@@ -1,16 +1,168 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Documentation</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
-      <h1>Objective</h1>
-      <p>To build the server-side component of a “movies” web application. The web
-        application will provide users with access to information about different
-        movies, directors, and genres. Users will be able to sign up, update their
-        personal information, and create a list of their favorite movies.</p>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Documentation</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <h1>Objective</h1>
+  <p>To build the server-side component of a “movies” web application. The web
+    application will provide users with access to information about different
+    movies, directors, and genres. Users will be able to sign up, update their
+    personal information, and create a list of their favorite movies.</p>
+    <table border="1">
+      <tr>
+        <th>REQUEST</th>
+        <th>URL</th>
+        <th>HTTP METHDOD</th>
+        <th>REQUEST BODY DATA FORMAT</th>
+        <th>RESPONSE BODY DATA FORMAT</th>
+      </tr>
+      <tr>
+        <td>Return the home page of myFlix App</td>
+        <td>/</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>Message saying 'Welcome to myFlix App'</td>
+      </tr>
+      <tr>
+        <td>Return a list of ALL movies to the user</td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>Return list of all the movies</td>
+      </tr>
+      <tr>
+        <td>Return data about a single movie by title to the user</td>
+        <td>/movies/:title</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about a single movie.
+          <br>
+          Example:
+          <br><code>
+            {
+              movieID: 1,
+              title: "The Shawshank Redemption",
+              rank: "1",
+              genre: "Drama",
+              director: "Frank Darabont",
+              yea: "1994",
+              duration: "2h 22m"
+            }
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>Return the list of all movies by genre to the user</td>
+        <td>/movies/genre/:genre</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding list of movies of that grene
+          <br>
+          Example:
+          <br><code>
+            {
+              "movieID": 6,
+              "title": "The Lord of the Rings: The Return of the King",
+              "rank": "6",
+              "genre": "Adventure",
+              "director": "Peter Jackson",
+              "year": "2003",
+              "duration": "3h 21m"
+            },
+            {
+              "movieID": 9,
+              "title": "The Lord of the Rings: The Fellowship of the Ring",
+              "rank": "9",
+              "genre": "Adventure",
+              "director": "Peter Jackson",
+              "year": "2001",
+              "duration": "2h 58m"
+            }
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>Return data about a director by name</td>
+        <td>/directors/:name</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data of a director
+          <br>
+          Example:
+          <br><code>
+            {
+              "directorID": 5,
+              "name": "Frank Darabont",
+              "description": "Writer, Producer, Writer. Three-time Oscar nominee",
+              "birthDate": "28/01/1959",
+              "deathDate": ""
+            }
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>Allow new users to register</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>A JSON object holding data about the new user
+          <br>
+          Example:
+          <br><code>
+            {
+              "name": "User5",
+              "emailID": "user5@mydomain.com",
+              "password": "user5"
+            }
+          </code>
+        </td>
+        <td>A text indicating a new user is registered.
+        </td>
+      </tr>
+      <tr>
+        <td>Allow users to update their user info (email)</td>
+        <td>/users/:name/:emailID</td>
+        <td>PUT</td>
+        <td>A JSON object holding the EmailID.
+          <br>
+          Example:
+          <br><code>
+            {
+              "emailID": "newuser1@mydomain.com"
+            }
+          </code>
+        </td>
+        <td>A text indicating User emailID was changed.
+        </td>
+      </tr>
+      <tr>
+        <td>Allow users to add a movie to their list of favorites</td>
+        <td>/users/:name/:title</td>
+        <td>POST</td>
+        <td>None</td>
+        <td>A text indicating Movie has been added to your favorites list.
+        </td>
+      </tr>
+      <tr>
+        <td>Allow users to remove a movie from their list of favorites</td>
+        <td>/users/:name/:title</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A text indicating Movie has been deleted from favorites list.
+        </td>
+      </tr>
+      <tr>
+        <td>Allow existing users to deregister</td>
+        <td>/delete/:name</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A text message indicating the user successfully deregistered.
+        </tr>
+      </tr>
+    </table>
+
   </body>
-</html>
+  </html>
