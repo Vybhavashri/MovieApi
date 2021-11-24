@@ -36,7 +36,7 @@
       </tr>
       <tr>
         <td>Return data about a single movie by title to the user</td>
-        <td>/movies/:title</td>
+        <td>/movies/:Title</td>
         <td>GET</td>
         <td>None</td>
         <td>A JSON object holding data about a single movie.
@@ -44,20 +44,31 @@
           Example:
           <br><code>
             {
-              movieID: 1,
-              title: "The Shawshank Redemption",
-              rank: "1",
-              genre: "Drama",
-              director: "Frank Darabont",
-              yea: "1994",
-              duration: "2h 22m"
-            }
+				"_id": {
+					"$oid": "6192c3afdb50bdac425b73ba"
+				},
+				"Title": "The Shawshank Redemption",
+				"Genre": {
+				"Name": "Drama",
+				"Description": "The drama genre features stories with high stakes and a lot of conflicts."
+				},
+				"Featured": true,
+				"ReleaseYear": 1994,
+				"Actors": ["Tim Robbins", "Morgan Freeman", "Bob Gunton"],
+				"Director": {
+					"Name": "Frank Darabont",
+					"Bio": "Writer, Producer, Writer. Three-time Oscar nominee.",
+					"Birth": {
+						"$date": "1959-01-28T23:00:00.000Z"
+					}
+				}
+			}
           </code>
         </td>
       </tr>
       <tr>
         <td>Return the list of all movies by genre to the user</td>
-        <td>/movies/genre/:genre</td>
+        <td>/movies/Genre/:Name</td>
         <td>GET</td>
         <td>None</td>
         <td>A JSON object holding list of movies of that grene
@@ -65,29 +76,51 @@
           Example:
           <br><code>
             {
-              "movieID": 6,
-              "title": "The Lord of the Rings: The Return of the King",
-              "rank": "6",
-              "genre": "Adventure",
-              "director": "Peter Jackson",
-              "year": "2003",
-              "duration": "3h 21m"
-            },
-            {
-              "movieID": 9,
-              "title": "The Lord of the Rings: The Fellowship of the Ring",
-              "rank": "9",
-              "genre": "Adventure",
-              "director": "Peter Jackson",
-              "year": "2001",
-              "duration": "2h 58m"
-            }
+        "Genre": {
+            "Name": "Adventure",
+            "Description": "The adventure genre is based on story-telling,that weave richly detailed settings together with a plot based on a journey or quest."
+        },
+        "Director": {
+            "Name": "Christopher Nolan",
+            "Bio": "Born and raised in London, Nolan developed an interest in filmmaking from a young age.",
+            "Birth": "1970-07-30T00:00:00.000Z"
+        },
+        "_id": "6192c3afdb50bdac425b73be",
+        "Title": "The Dark Knight",
+        "Featured": true,
+        "ReleaseYear": 2008,
+        "Actors": [
+            "Christian Bale",
+            "Heath Ledger",
+            "Aaron Eckhart"
+        ]
+    },<br>
+    {
+        "Genre": {
+            "Name": "Adventure",
+            "Description": "The adventure genre is based on story-telling,that weave richly detailed settings together with a plot based on a journey or quest."
+        },
+        "Director": {
+            "Name": "Christopher Nolan",
+            "Bio": "Best known for his cerebral, often nonlinear, storytelling.",
+            "Birth": "1970-07-30T00:00:00.000Z"
+        },
+        "_id": "6192c3afdb50bdac425b73c0",
+        "Title": "Batman Begins",
+        "Featured": true,
+        "ReleaseYear": 2005,
+        "Actors": [
+            "Christian Bale",
+            "Michael Caine",
+            "Ken Watanabe"
+        ]
+    },
           </code>
         </td>
       </tr>
       <tr>
         <td>Return data about a director by name</td>
-        <td>/directors/:name</td>
+        <td>/movies/directors/:Name</td>
         <td>GET</td>
         <td>None</td>
         <td>A JSON object holding data of a director
@@ -95,12 +128,13 @@
           Example:
           <br><code>
             {
-              "directorID": 5,
-              "name": "Frank Darabont",
-              "description": "Writer, Producer, Writer. Three-time Oscar nominee",
-              "birthDate": "28/01/1959",
-              "deathDate": ""
-            }
+			"Director": {
+				"Name": "Frank Darabont",
+				"Bio": "Writer, Producer, Writer. Three-time Oscar nominee.",
+				"Birth": "1959-01-28T23:00:00.000Z"
+				},
+			"_id": "6192c3afdb50bdac425b73ba"
+			}
           </code>
         </td>
       </tr>
@@ -113,53 +147,143 @@
           Example:
           <br><code>
             {
-              "name": "User5",
-              "emailID": "user5@mydomain.com",
-              "password": "user5"
-            }
+			"Name": "User5",
+			"EmailID": "user5@mydomain.com",
+			"Password": "user5"
+			}
           </code>
         </td>
-        <td>A text indicating a new user is registered.
+        <td>A JSON object holding data of a User
+          <br>
+          Example:
+          <br><code>{
+			"Name": "User5",
+			"EmailID": "user5@mydomain.com",
+			"Password": "user5",
+			"FavouriteMovies": [],
+			"_id": "619daeee5c867750342e2b73",
+			"__v": 0
+			}
+			</code>
         </td>
       </tr>
       <tr>
-        <td>Allow users to update their user info (email)</td>
-        <td>/users/:name/:emailID</td>
+        <td>Allow users to update their user info</td>
+        <td>/users/:Name</td>
         <td>PUT</td>
         <td>A JSON object holding the EmailID.
           <br>
           Example:
           <br><code>
             {
-              "emailID": "newuser1@mydomain.com"
-            }
+			"Name": "New User5",
+			"Password": "newPassword",
+			"EmailID": "newEmailID@mydomain.com",
+			"Birth": "1990-01-01"
+			}
           </code>
         </td>
-        <td>A text indicating User emailID was changed.
+        <td>A JSON object holding the data about the user.
+          <br>
+          Example:
+          <br><code>
+            {
+			"_id": "619daeee5c867750342e2b73",
+			"Name": "New User5",
+			"EmailID": "newEmailID@mydomain.com",
+			"Password": "newPassword",
+			"FavouriteMovies": [],
+			"__v": 0,
+			"Birth": "1990-01-01T00:00:00.000Z"
+			}
+          </code>
         </td>
       </tr>
       <tr>
         <td>Allow users to add a movie to their list of favorites</td>
-        <td>/users/:name/:title</td>
+        <td>/users/:name/movies/:movieID</td>
         <td>POST</td>
         <td>None</td>
-        <td>A text indicating Movie has been added to your favorites list.
+        <td>A JSON object holding the data about the user.
+          <br>
+          Example:
+          <br><code>
+            {
+			"_id": "619460191178eb9314ab7f6d",
+			"Name": "User4",
+			"EmailID": "user4@mydomain.com",
+			"Password": "user4",
+			"Birth": "1990-12-04T00:00:00.000Z",
+			"FavouriteMovies": [
+			"6192c3afdb50bdac425b73c0",
+			"6192c3afdb50bdac425b73bb",
+			"6192c3afdb50bdac425b73bb"
+			]
+			}
+          </code>
         </td>
       </tr>
       <tr>
         <td>Allow users to remove a movie from their list of favorites</td>
-        <td>/users/:name/:title</td>
+        <td>/users/:Name/delete/:MovieID</td>
         <td>DELETE</td>
         <td>None</td>
-        <td>A text indicating Movie has been deleted from favorites list.
+        <td>A JSON object holding the data about the user.
+          <br>
+          Example:
+          <br><code>
+		{
+		"_id": "619460191178eb9314ab7f6b",
+		"Name": "User2",
+		"EmailID": "user2@mydomain.com",
+		"Password": "user2",
+		"Birth": "1990-12-02T00:00:00.000Z",
+		"FavouriteMovies": [
+			"6192c3afdb50bdac425b73bd"
+			]
+		}
+          </code>
         </td>
       </tr>
       <tr>
         <td>Allow existing users to deregister</td>
-        <td>/delete/:name</td>
+        <td>/users/delete/:Name</td>
         <td>DELETE</td>
         <td>None</td>
         <td>A text message indicating the user successfully deregistered.
+        </tr>
+      </tr>
+	  <tr>
+        <td>Return a list of all users</td>
+        <td>/users</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding the data about all the users</td>
+        </tr>
+      </tr>
+	  <tr>
+        <td>Return a user by username</td>
+        <td>/users/:Name</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding the data about the user.
+          <br>
+          Example:
+          <br><code>
+            {
+			"_id": "619460191178eb9314ab7f6d",
+			"Name": "User4",
+			"EmailID": "user4@mydomain.com",
+			"Password": "user4",
+			"Birth": "1990-12-04T00:00:00.000Z",
+			"FavouriteMovies": [
+			"6192c3afdb50bdac425b73c0",
+			"6192c3afdb50bdac425b73bb",
+			"6192c3afdb50bdac425b73bb"
+			]
+			}
+          </code>
+        </td>
         </tr>
       </tr>
     </table>
