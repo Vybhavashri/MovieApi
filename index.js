@@ -9,7 +9,9 @@ Users = Models.User,
 cors = require('cors'),
 passport = require('passport');
 require('./passport');
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('process.env.CONNECTION_URI',{ useNewUrlParser: true, useUnifiedTopology: true });
+
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 const { check, validationResult } = require('express-validator');
 const port = process.env.PORT || 8080;
@@ -115,7 +117,7 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
 });
 
 //Allow new users to register
-app.post('/users', passport.authenticate('jwt', { session: false }),
+app.post('/users',
 [
   check('Username', 'Username is required').isLength({min: 5}),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
