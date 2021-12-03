@@ -9,8 +9,8 @@ Users = Models.User,
 cors = require('cors'),
 passport = require('passport');
 require('./passport');
-//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
-mongoose.connect('process.env.CONNECTION_URI',{ useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect('process.env.CONNECTION_URI',{ useNewUrlParser: true, useUnifiedTopology: true });
 
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
 const { check, validationResult } = require('express-validator');
