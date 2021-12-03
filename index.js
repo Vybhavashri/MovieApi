@@ -9,10 +9,11 @@ Users = Models.User,
 cors = require('cors'),
 passport = require('passport');
 require('./passport');
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
-//mongoose.connect('process.env.CONNECTION_URI',{ useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('CONNECTION_URI',{ useNewUrlParser: true, useUnifiedTopology: true });
+//CONNECTION_URI:mongodb+srv://myFlixDBadmin:myFlixPassword@myflixdb.qfala.mongodb.net/myFlixDB?retryWrites=true&w=majority
 
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'www.heroku.com','www.mongodb.com'];
 const { check, validationResult } = require('express-validator');
 const port = process.env.PORT || 8080;
 
@@ -122,7 +123,7 @@ app.post('/users',
   check('Username', 'Username is required').isLength({min: 5}),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
   check('Password', 'Password is required').not().isEmpty(),
-  check('Email', 'Email does not appear to be valid').isEmail()
+  check('EmailID', 'Email does not appear to be valid').isEmail()
 ], (req, res) => {
   // check the validation object for errors
   let errors = validationResult(req);
@@ -141,8 +142,8 @@ app.post('/users',
       .create({
         Username: req.body.Username,
         Password: hashedPassword,
-        Email: req.body.Email,
-        Birthday: req.body.Birthday
+        EmailID: req.body.EmailID,
+        Birth: req.body.Birth
       })
       .then((user) => { res.status(201).json(user) })
       .catch((error) => {
@@ -228,6 +229,9 @@ app.delete('/users/:Username/delete/:MovieID', passport.authenticate('jwt', { se
 });
 
 // listen for requests
-app.listen(port, '0.0.0.0',() => {
- console.log('Listening on Port ' + port);
-});
+ app.listen(port, '0.0.0.0',() => {
+  console.log('Listening on Port ' + port);
+ });
+// app.listen(8080, () =>{
+//   console.log('Your app is listening on port 8080.');
+// });
