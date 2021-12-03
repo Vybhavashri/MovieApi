@@ -19,16 +19,16 @@ passport.use(new LocalStrategy({
     }
 
     if (!user) {
-      console.log('incorrect username');
-      return callback(null, false, {message: 'Incorrect username.'});
+      console.log(' Incorrect username');
+      return callback(null, false, {message: ' Incorrect username.'});
     }
 
     if (!user.validatePassword(password)) {
-      console.log('incorrect password');
-      return callback(null, false, {message: 'Incorrect password.'});
+      console.log(' Incorrect password');
+      return callback(null, false, {message: ' Incorrect password.'});
     }
 
-    console.log('finished');
+    console.log(' Finished');
     return callback(null, user);
   });
 }));
