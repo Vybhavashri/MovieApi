@@ -5,12 +5,29 @@ mongoose = require('mongoose'),
 bodyParser = require('body-parser'),
 Models = require('./model.js'),
 Movies = Models.Movie,
-Users = Models.User;
-const passport = require('passport');
+Users = Models.User,
+cors = require('cors'),
+passport = require('passport');
 require('./passport');
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('CONNECTION_URI',{ useNewUrlParser: true, useUnifiedTopology: true });
+//CONNECTION_URI:mongodb+srv://myFlixDBadmin:myFlixPassword@myflixdb.qfala.mongodb.net/myFlixDB?retryWrites=true&w=majority
+
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'www.heroku.com','www.mongodb.com'];
+const { check, validationResult } = require('express-validator');
+const port = process.env.PORT || 8080;
 
 //Middleware
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
 app.use(express.static('public'));
 app.use(morgan('common'));
 app.use((err, req, res, next) => {console.error(err.stack);res.status(500).send('Something broke!');});
@@ -101,23 +118,38 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
 });
 
 //Allow new users to register
-app.post('/users', (req, res) => {
-  Users.findOne({ Username: req.body.Username })
+app.post('/users',
+[
+  check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('EmailID', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+  // check the validation object for errors
+  let errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
+  let hashedPassword = Users.hashPassword(req.body.Password);
+  Users.findOne({ Username: req.body.Username }) // Search to see if a user with the requested username already exists
   .then((user) => {
     if (user) {
+      //If the user is found, send a response that it already exists
       return res.status(400).send(req.body.Username + ' already exists');
     } else {
-      Users.create({
+      Users
+      .create({
         Username: req.body.Username,
-        Password: req.body.Password,
+        Password: hashedPassword,
         EmailID: req.body.EmailID,
         Birth: req.body.Birth
       })
-      .then((user) =>{res.status(201).json(user) })
+      .then((user) => { res.status(201).json(user) })
       .catch((error) => {
         console.error(error);
         res.status(500).send('Error: ' + error);
-      })
+      });
     }
   })
   .catch((error) => {
@@ -197,6 +229,9 @@ app.delete('/users/:Username/delete/:MovieID', passport.authenticate('jwt', { se
 });
 
 // listen for requests
-app.listen(8080, () =>{
-  console.log('Your app is listening on port 8080.');
+app.listen(port, '0.0.0.0',() => {
+  console.log('Listening on Port ' + port);
 });
+// app.listen(8080, () =>{
+//   console.log('Your app is listening on port 8080.');
+// });
