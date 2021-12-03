@@ -9,8 +9,8 @@ Users = Models.User,
 cors = require('cors'),
 passport = require('passport');
 require('./passport');
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
-//mongoose.connect('CONNECTION_URI',{ useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('CONNECTION_URI',{ useNewUrlParser: true, useUnifiedTopology: true });
 //CONNECTION_URI:mongodb+srv://myFlixDBadmin:myFlixPassword@myflixdb.qfala.mongodb.net/myFlixDB?retryWrites=true&w=majority
 
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'www.heroku.com','www.mongodb.com'];
