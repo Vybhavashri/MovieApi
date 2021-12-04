@@ -14,7 +14,7 @@ const { check, validationResult } = require('express-validator');
 //Mongoose local database connection string
 //mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 //Mongoose Atlas Database connection string
-mongoose.connect('mongodb+srv://myFlixDBadmin:myFlixPassword@myflixdb.qfala.mongodb.net/myFlixDB?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(CONNECTION_URI,{ useNewUrlParser: true, useUnifiedTopology: true });
 //CONNECTION_URI:mongodb+srv://myFlixDBadmin:myFlixPassword@myflixdb.qfala.mongodb.net/myFlixDB?retryWrites=true&w=majority
 
 //Middleware
