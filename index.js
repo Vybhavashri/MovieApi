@@ -12,7 +12,7 @@ require('./passport');
 let allowedOrigins = ['*'];
 const { check, validationResult } = require('express-validator');
 //Mongoose Atlas Database connection string
-mongoose.connect('mongodb+srv://myFlixDBadmin:myFlixPassword@myflixdb.qfala.mongodb.net/myFlixDB?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.CONNECTION_URI,{ useNewUrlParser: true, useUnifiedTopology: true });
 
 //Middleware
 app.use(cors({
