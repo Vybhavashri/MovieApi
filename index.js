@@ -11,11 +11,8 @@ passport = require('passport');
 require('./passport');
 let allowedOrigins = ['*'];
 const { check, validationResult } = require('express-validator');
-//Mongoose local database connection string
-//mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 //Mongoose Atlas Database connection string
-mongoose.connect(CONNECTION_URI,{ useNewUrlParser: true, useUnifiedTopology: true });
-//CONNECTION_URI:mongodb+srv://myFlixDBadmin:myFlixPassword@myflixdb.qfala.mongodb.net/myFlixDB?retryWrites=true&w=majority
+mongoose.connect('mongodb+srv://myFlixDBadmin:myFlixPassword@myflixdb.qfala.mongodb.net/myFlixDB?retryWrites=true&w=majority',{ useNewUrlParser: true, useUnifiedTopology: true });
 
 //Middleware
 app.use(cors({
@@ -233,6 +230,3 @@ const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
   console.log('Listening on Port ' + port);
 });
-// app.listen(8080, () =>{
-//   console.log('Your app is listening on port 8080.');
-// });
