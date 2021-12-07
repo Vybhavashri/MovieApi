@@ -147,7 +147,7 @@
           Example:
           <br><code>
             {
-			"Name": "User5",
+			"Username": "User5",
 			"EmailID": "user5@mydomain.com",
 			"Password": "user5"
 			}
@@ -157,7 +157,7 @@
           <br>
           Example:
           <br><code>{
-			"Name": "User5",
+			"Username": "User5",
 			"EmailID": "user5@mydomain.com",
 			"Password": "user5",
 			"FavouriteMovies": [],
@@ -169,14 +169,14 @@
       </tr>
       <tr>
         <td>Allow users to update their user info</td>
-        <td>/users/:Name</td>
+        <td>/users/:Username</td>
         <td>PUT</td>
         <td>A JSON object holding the EmailID.
           <br>
           Example:
           <br><code>
             {
-			"Name": "New User5",
+			"Username": "New User5",
 			"Password": "newPassword",
 			"EmailID": "newEmailID@mydomain.com",
 			"Birth": "1990-01-01"
@@ -189,7 +189,7 @@
           <br><code>
             {
 			"_id": "619daeee5c867750342e2b73",
-			"Name": "New User5",
+			"Username": "New User5",
 			"EmailID": "newEmailID@mydomain.com",
 			"Password": "newPassword",
 			"FavouriteMovies": [],
@@ -201,7 +201,7 @@
       </tr>
       <tr>
         <td>Allow users to add a movie to their list of favorites</td>
-        <td>/users/:name/movies/:movieID</td>
+        <td>/users/:Username/movies/:movieID</td>
         <td>POST</td>
         <td>None</td>
         <td>A JSON object holding the data about the user.
@@ -210,7 +210,7 @@
           <br><code>
             {
 			"_id": "619460191178eb9314ab7f6d",
-			"Name": "User4",
+			"Username": "User4",
 			"EmailID": "user4@mydomain.com",
 			"Password": "user4",
 			"Birth": "1990-12-04T00:00:00.000Z",
@@ -225,7 +225,7 @@
       </tr>
       <tr>
         <td>Allow users to remove a movie from their list of favorites</td>
-        <td>/users/:Name/delete/:MovieID</td>
+        <td>/users/:Username/delete/:MovieID</td>
         <td>DELETE</td>
         <td>None</td>
         <td>A JSON object holding the data about the user.
@@ -234,7 +234,7 @@
           <br><code>
 		{
 		"_id": "619460191178eb9314ab7f6b",
-		"Name": "User2",
+		"Username": "User2",
 		"EmailID": "user2@mydomain.com",
 		"Password": "user2",
 		"Birth": "1990-12-02T00:00:00.000Z",
@@ -247,7 +247,7 @@
       </tr>
       <tr>
         <td>Allow existing users to deregister</td>
-        <td>/users/delete/:Name</td>
+        <td>/users/delete/:Username</td>
         <td>DELETE</td>
         <td>None</td>
         <td>A text message indicating the user successfully deregistered.
@@ -263,7 +263,7 @@
       </tr>
 	  <tr>
         <td>Return a user by username</td>
-        <td>/users/:Name</td>
+        <td>/users/:Username</td>
         <td>GET</td>
         <td>None</td>
         <td>A JSON object holding the data about the user.
@@ -272,7 +272,7 @@
           <br><code>
             {
 			"_id": "619460191178eb9314ab7f6d",
-			"Name": "User4",
+			"Username": "User4",
 			"EmailID": "user4@mydomain.com",
 			"Password": "user4",
 			"Birth": "1990-12-04T00:00:00.000Z",
