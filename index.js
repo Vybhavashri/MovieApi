@@ -9,7 +9,7 @@ const express = require('express'),
   cors = require('cors'),
   passport = require('passport');
 require('./passport');
-let allowedOrigins = ['*','https://www.filmaffinity.com'];
+let allowedOrigins = ['http://localhost:1234','https://www.filmaffinity.com/us/movieimage.php?imageId=746000499'];
 const { check, validationResult } = require('express-validator');
 //Mongoose Atlas Database connection string
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
