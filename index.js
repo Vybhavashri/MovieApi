@@ -9,7 +9,7 @@ const express = require('express'),
   cors = require('cors'),
   passport = require('passport');
 require('./passport');
-let allowedOrigins = ['http://localhost:1234'];
+let allowedOrigins = ['*'];
 const { check, validationResult } = require('express-validator');
 //Mongoose Atlas Database connection string
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
