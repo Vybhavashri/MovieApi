@@ -9,7 +9,7 @@ const express = require('express'),
   cors = require('cors'),
   passport = require('passport');
 require('./passport');
-let allowedOrigins = ['*'];
+//let allowedOrigins = ['*'];
 const { check, validationResult } = require('express-validator');
 //Mongoose Atlas Database connection string
 mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -25,6 +25,7 @@ mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnified
 //     return callback(null, true);
 //   }
 // }));
+app.options('*', cors());
 app.use(cors());
 app.use(express.static('public'));
 app.use(morgan('common'));
