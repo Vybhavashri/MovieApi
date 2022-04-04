@@ -1,4 +1,4 @@
-# MovieApi # (REST API)
+# MovieApi (REST API)
 
 ## Objective ##
 To build the server-side component of a “movies” web application. The web
