@@ -1,48 +1,54 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
   <title>Documentation</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="styles.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+
 <body>
   <h1>Objective</h1>
   <p>To build the server-side component of a “movies” web application. The web
     application will provide users with access to information about different
     movies, directors, and genres. Users will be able to sign up, update their
     personal information, and create a list of their favorite movies.</p>
-    <table border="1">
+  <table class="table table-bordered">
+    <thead class="thead-dark">
       <tr>
-        <th>REQUEST</th>
-        <th>URL</th>
-        <th>HTTP METHDOD</th>
-        <th>REQUEST BODY DATA FORMAT</th>
-        <th>RESPONSE BODY DATA FORMAT</th>
+        <th scope="col">REQUEST</th>
+        <th scope="col">URL</th>
+        <th scope="col">HTTP METHDOD</th>
+        <th scope="col">REQUEST BODY DATA FORMAT</th>
+        <th scope="col">RESPONSE BODY DATA FORMAT</th>
       </tr>
-      <tr>
-        <td>Return the home page of myFlix App</td>
-        <td>/</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>Message saying 'Welcome to myFlix App'</td>
-      </tr>
-      <tr>
-        <td>Return a list of ALL movies to the user</td>
-        <td>/movies</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>Return list of all the movies</td>
-      </tr>
-      <tr>
-        <td>Return data about a single movie by title to the user</td>
-        <td>/movies/:Title</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>A JSON object holding data about a single movie.
-          <br>
-          Example:
-          <br><code>
+    </thead>
+    <tr>
+      <td>Return the home page of myFlix App</td>
+      <td>/</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>Message saying 'Welcome to myFlix App'</td>
+    </tr>
+    <tr>
+      <td>Return a list of ALL movies to the user</td>
+      <td>/movies</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>Return list of all the movies</td>
+    </tr>
+    <tr>
+      <td>Return data about a single movie by title to the user</td>
+      <td>/movies/:Title</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>A JSON object holding data about a single movie.
+        <br>
+        Example:
+        <br><code>
             {
 				"_id": {
 					"$oid": "6192c3afdb50bdac425b73ba"
@@ -64,17 +70,17 @@
 				}
 			}
           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Return the list of all movies by genre to the user</td>
-        <td>/movies/Genre/:Name</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>A JSON object holding list of movies of that grene
-          <br>
-          Example:
-          <br><code>
+      </td>
+    </tr>
+    <tr>
+      <td>Return the list of all movies by genre to the user</td>
+      <td>/movies/Genre/:Name</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>A JSON object holding list of movies of that grene
+        <br>
+        Example:
+        <br><code>
             {
         "Genre": {
             "Name": "Adventure",
@@ -116,17 +122,17 @@
         ]
     },
           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Return data about a director by name</td>
-        <td>/movies/directors/:Name</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>A JSON object holding data of a director
-          <br>
-          Example:
-          <br><code>
+      </td>
+    </tr>
+    <tr>
+      <td>Return data about a director by name</td>
+      <td>/movies/directors/:Name</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>A JSON object holding data of a director
+        <br>
+        Example:
+        <br><code>
             {
 			"Director": {
 				"Name": "Frank Darabont",
@@ -136,27 +142,27 @@
 			"_id": "6192c3afdb50bdac425b73ba"
 			}
           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Allow new users to register</td>
-        <td>/users</td>
-        <td>POST</td>
-        <td>A JSON object holding data about the new user
-          <br>
-          Example:
-          <br><code>
+      </td>
+    </tr>
+    <tr>
+      <td>Allow new users to register</td>
+      <td>/users</td>
+      <td>POST</td>
+      <td>A JSON object holding data about the new user
+        <br>
+        Example:
+        <br><code>
             {
 			"Username": "User5",
 			"EmailID": "user5@mydomain.com",
 			"Password": "user5"
 			}
           </code>
-        </td>
-        <td>A JSON object holding data of a User
-          <br>
-          Example:
-          <br><code>{
+      </td>
+      <td>A JSON object holding data of a User
+        <br>
+        Example:
+        <br><code>{
 			"Username": "User5",
 			"EmailID": "user5@mydomain.com",
 			"Password": "user5",
@@ -165,16 +171,16 @@
 			"__v": 0
 			}
 			</code>
-        </td>
-      </tr>
-      <tr>
-        <td>Allow users to update their user info</td>
-        <td>/users/:Username</td>
-        <td>PUT</td>
-        <td>A JSON object holding the EmailID.
-          <br>
-          Example:
-          <br><code>
+      </td>
+    </tr>
+    <tr>
+      <td>Allow users to update their user info</td>
+      <td>/users/:Username</td>
+      <td>PUT</td>
+      <td>A JSON object holding the EmailID.
+        <br>
+        Example:
+        <br><code>
             {
 			"Username": "New User5",
 			"Password": "newPassword",
@@ -182,11 +188,11 @@
 			"Birth": "1990-01-01"
 			}
           </code>
-        </td>
-        <td>A JSON object holding the data about the user.
-          <br>
-          Example:
-          <br><code>
+      </td>
+      <td>A JSON object holding the data about the user.
+        <br>
+        Example:
+        <br><code>
             {
 			"_id": "619daeee5c867750342e2b73",
 			"Username": "New User5",
@@ -197,17 +203,17 @@
 			"Birth": "1990-01-01T00:00:00.000Z"
 			}
           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Allow users to add a movie to their list of favorites</td>
-        <td>/users/:Username/movies/:movieID</td>
-        <td>POST</td>
-        <td>None</td>
-        <td>A JSON object holding the data about the user.
-          <br>
-          Example:
-          <br><code>
+      </td>
+    </tr>
+    <tr>
+      <td>Allow users to add a movie to their list of favorites</td>
+      <td>/users/:Username/movies/:movieID</td>
+      <td>POST</td>
+      <td>None</td>
+      <td>A JSON object holding the data about the user.
+        <br>
+        Example:
+        <br><code>
             {
 			"_id": "619460191178eb9314ab7f6d",
 			"Username": "User4",
@@ -221,17 +227,17 @@
 			]
 			}
           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Allow users to remove a movie from their list of favorites</td>
-        <td>/users/:Username/delete/:MovieID</td>
-        <td>DELETE</td>
-        <td>None</td>
-        <td>A JSON object holding the data about the user.
-          <br>
-          Example:
-          <br><code>
+      </td>
+    </tr>
+    <tr>
+      <td>Allow users to remove a movie from their list of favorites</td>
+      <td>/users/:Username/delete/:MovieID</td>
+      <td>DELETE</td>
+      <td>None</td>
+      <td>A JSON object holding the data about the user.
+        <br>
+        Example:
+        <br><code>
 		{
 		"_id": "619460191178eb9314ab7f6b",
 		"Username": "User2",
@@ -243,33 +249,33 @@
 			]
 		}
           </code>
-        </td>
-      </tr>
-      <tr>
-        <td>Allow existing users to deregister</td>
-        <td>/users/delete/:Username</td>
-        <td>DELETE</td>
-        <td>None</td>
-        <td>A text message indicating the user successfully deregistered.
-        </tr>
-      </tr>
-	  <tr>
-        <td>Return a list of all users</td>
-        <td>/users</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>A JSON object holding the data about all the users</td>
-        </tr>
-      </tr>
-	  <tr>
-        <td>Return a user by username</td>
-        <td>/users/:Username</td>
-        <td>GET</td>
-        <td>None</td>
-        <td>A JSON object holding the data about the user.
-          <br>
-          Example:
-          <br><code>
+      </td>
+    </tr>
+    <tr>
+      <td>Allow existing users to deregister</td>
+      <td>/users/delete/:Username</td>
+      <td>DELETE</td>
+      <td>None</td>
+      <td>A text message indicating the user successfully deregistered.
+    </tr>
+    </tr>
+    <tr>
+      <td>Return a list of all users</td>
+      <td>/users</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>A JSON object holding the data about all the users</td>
+    </tr>
+    </tr>
+    <tr>
+      <td>Return a user by username</td>
+      <td>/users/:Username</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>A JSON object holding the data about the user.
+        <br>
+        Example:
+        <br><code>
             {
 			"_id": "619460191178eb9314ab7f6d",
 			"Username": "User4",
@@ -283,10 +289,21 @@
 			]
 			}
           </code>
-        </td>
-        </tr>
-      </tr>
-    </table>
+      </td>
+    </tr>
+    </tr>
+  </table>
 
-  </body>
-  </html>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</body>
+
+</html>
