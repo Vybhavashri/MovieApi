@@ -12,7 +12,9 @@ require('./passport');
 let allowedOrigins = ['*'];
 const { check, validationResult } = require('express-validator');
 //Mongoose Atlas Database connection string
-mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+//mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 //Middleware
 app.use(cors());
@@ -299,7 +301,7 @@ app.delete('/users/:Username/delete/:MovieID', passport.authenticate('jwt', { se
 });
 
 // listen for requests
-const port = process.env.PORT || 8080;
+const port = 3000;
 app.listen(port, '0.0.0.0', () => {
   console.log('Listening on Port ' + port);
 });
